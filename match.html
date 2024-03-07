@@ -103,6 +103,24 @@
       cursor: pointer;
     }
   </style>
+  <style>
+  /* ... (the rest of the style rules) */
+
+  .button--reveal-answer {
+    margin: 15px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+
+  .droppable--correct {
+    color: green;
+  }
+
+  .droppable--incorrect {
+    color: red;
+  }
+  </style>
 
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <script defer src="https://analytics.eu.umami.is/script.js" data-website-id="c21f2db2-88e9-4f47-931e-106a38134e74"></script>
@@ -256,6 +274,43 @@
     window.onload = function() {
       displayQuiz();
     };
+  </script>
+  <script type="module">
+  import { Droppable } from 'https://cdn.jsdelivr.net/npm/@shopify/draggable@1.1.3/+esm'
+
+  async function fetchTerroristData() {
+    // ... (the rest of the fetchTerroristData function)
+  }
+
+  async function displayQuiz() {
+    // ... (the rest of the displayQuiz function)
+
+    // Append the "Learn Correct Answer" button to the container
+    const revealCorrectAnswerButton = document.createElement('button');
+    revealCorrectAnswerButton.innerText = 'Öğren correct cevabı';
+    revealCorrectAnswerButton.classList.add('button--reveal-answer');
+    revealCorrectAnswerButton.addEventListener('click', () => revealCorrectAnswer(zones));
+    quizContainer.appendChild(revealCorrectAnswerButton);
+
+    // ... (the rest of the displayQuiz function)
+  }
+
+  function revealCorrectAnswer(zones) {
+    zones.forEach((zone) => {
+      const answer = zone.firstChild;
+      if (answer && answer.dataset.org === zone.dataset.org) {
+        zone.classList.add('droppable--correct');
+      } else {
+        zone.classList.add('droppable--incorrect');
+        answer.firstChild.innerHTML = zone.dataset.org;
+      }
+    });
+
+    const revealAnswerButtons = document.querySelectorAll('.button--reveal-answer');
+    revealAnswerButtons.forEach((button) => button.remove());
+  }
+
+  // ... (the rest of the script)
   </script>
 </body>
 </html>
