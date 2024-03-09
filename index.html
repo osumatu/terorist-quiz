@@ -213,7 +213,7 @@
     }
 
     const randomIndex = Math.floor(Math.random() * terroristData.length);
-    const currentTerrorist = terroristData[randomIndex];
+    const currentTerrorist = terroristData[randomIndex]; // bu değişken isimleri sıkıntı gibi NOASDKMLŞASD
     const correctAnswer = currentTerrorist.TOrgutAdi;
     const uniqueTerroristNames = Array.from(new Set(terroristData.map(data => data.TOrgutAdi)));
     const indexToRemove = uniqueTerroristNames.indexOf(correctAnswer);
@@ -226,7 +226,11 @@
 
     for (let i = 0; i < 3; i++) {
       const randomIndex = Math.floor(Math.random() * uniqueTerroristNames.length);
-      incorrectAnswers.push(uniqueTerroristNames[randomIndex]);
+      if (uniqueTerroristNames[randomIndex] == "DKP/BÖG" || uniqueTerroristNames[randomIndex] == "DEVRİMCİ KARARGAH") {
+        incorrectAnswers.push("DKP/BÖG");   
+      } else {
+        incorrectAnswers.push(uniqueTerroristNames[randomIndex]);   
+      }
       uniqueTerroristNames.splice(randomIndex, 1);
     }
 

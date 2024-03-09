@@ -136,7 +136,6 @@
 
     async function displayQuiz() {
       const terroristData = await fetchTerroristData();
-
       if (terroristData.length === 0) {
         alert('Failed to fetch data. Please try again later.');
 
@@ -144,7 +143,6 @@
       }
 
       const board = [];
-
       const allOrganisations = terroristData.map((t) => t.TOrgutAdi).filter((v, i, a) => a.indexOf(v) === i);
       const randomOrganisations = allOrganisations.sort(() => 0.5 - Math.random()).slice(0, 4);
 
@@ -207,23 +205,23 @@
         let title = '';
 
         if (correct === 4) {
-          title = 'MIT goreve cagiriyor!';
+          title = 'MIT göreve çağırıyor!';
         } else if (correct === 3) {
-          title = 'Yuru be babus!';
+          title = 'Yürü be babuş!';
         } else if (correct === 2) {
           title = 'Ha gayret.';
         } else {
-          title = 'Hocam goz var izan var ya.';
+          title = 'Hocam göz var izan var ya.';
         }
 
         Swal.fire({
           title: title,
-          text: `4 orgutten ${correct} tanesini dogru eslestirdin.`,
+          text: `4 örgütten ${correct} tanesini doğru eşleştirdin.`,
           confirmButtonText: 'Tekrar Oyna',
           icon: 'info',
           ...((correct < 4) && {
             showCancelButton: true,
-            cancelButtonText: 'Cevaplara Bakayim',
+            cancelButtonText: 'Cevaplara Bakayım',
           }),
         }).then((result) => {
           if (result.isConfirmed) {
